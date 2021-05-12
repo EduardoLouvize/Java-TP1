@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class ControleAcademico {
@@ -12,7 +13,9 @@ public class ControleAcademico {
 	
 	
 	public static void main(String[] args) {
-		
+		nomes = new String[QUANTIDADEALUNOS];
+		notasAvaliacao1 = new float[QUANTIDADEALUNOS];
+		notasAvaliacao2 = new float[QUANTIDADEALUNOS];
 		
 		
 		captarETratarOpcao();
@@ -53,16 +56,16 @@ public class ControleAcademico {
 				index++;
 				break;
 			case "2":
-				System.out.println("Você escolheu a opção " + opcao);
-				System.out.println("[2] Consultar boletim de um aluno.");
+				System.out.println("Informe o registro a ser consultado:");
+				int registro = in.nextInt();
+				consultarNotasDaTurma(registro);
 				break;
 			case "3":
-				System.out.println("Você escolheu a opção " + opcao);
 				System.out.println("[3] Consultar notas da turma.");
+				consultarNotasDaTurma();
 				break;
 			case "4":
-				System.out.println("Você escolheu a opção " + opcao);
-				System.out.println("Saindo do sistema.");
+				System.out.println("Saindo.");
 				break;
 			default:
 				System.out.println("Opção inválida");
@@ -76,9 +79,7 @@ public class ControleAcademico {
 	}
 
 	private static void registrarNota(int index) {
-		nomes = new String[QUANTIDADEALUNOS];
-		notasAvaliacao1 = new float[QUANTIDADEALUNOS];
-		notasAvaliacao2 = new float[QUANTIDADEALUNOS];
+		
 		
 		System.out.println("Informe o nome do aluno:");
 		nomes[index] = in.next();
@@ -90,10 +91,25 @@ public class ControleAcademico {
 		notasAvaliacao2[index] = in.nextFloat();
 		
 		System.out.println("Dados registrados:");
-		System.out.printf("[%d] - %s - Nota 1: %f - Nota 2: %f\n", index, nomes[index], notasAvaliacao1[index], notasAvaliacao2[index]);
+		System.out.printf("[%d] - %s - Nota 1: %f - Nota 2: %.2f\n", index, nomes[index], notasAvaliacao1[index], notasAvaliacao2[index]);
 	}
 	
 	private static void consultarNotasDaTurma() {
-		// IMPLEMENTAR
+			for (int i = 0; i < QUANTIDADEALUNOS; i++) {
+				consultarNotasDaTurma(i);
+			}	
+		}
+		
+	
+	
+	private static void consultarNotasDaTurma(int index) {		
+		
+			if (nomes[index] != null) {
+				System.out.printf("[%d] - %s - Nota 1: %f - Nota 2: %.2f\n", index, nomes[index], notasAvaliacao1[index], notasAvaliacao2[index]);
+				
+				index++;
+			}			
+		
+		
 	}
 }
