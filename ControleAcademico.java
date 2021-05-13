@@ -51,14 +51,18 @@ public class ControleAcademico {
 			switch (opcao) {
 			case "1":
 				registrarNota(index);
-				index++;
+
 				break;
 			case "2":
 				System.out.println("Informe o registro a ser consultado:");
 				int registro = in.nextInt();
-				System.out.println("/\\/\\/\\/\\/\\/\\/\\");
-				consultarNotasDaTurma(registro);
-				System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+				if (registro >= 0 && registro < index) {
+					System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+					consultarNotasDaTurma(registro);
+					System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+				} else {
+					System.out.println("Registro inexistente.");
+				}
 				break;
 			case "3":
 				System.out.println("NOTAS DA TURMA.");
@@ -83,25 +87,30 @@ public class ControleAcademico {
 		return opcao;
 	}
 
-	private static void registrarNota(int index) {
+	private static void registrarNota(int idx) {
 
-		if (index < QUANTIDADEALUNOS) {
+		if (idx < QUANTIDADEALUNOS) {
 
 			System.out.println("Informe o nome do aluno:");
-			nomes[index] = in.next();
-			
+			nomes[idx] = in.next();
+
 			System.out.println("Nota da avaliação 1:");
-			notasAvaliacao1[index] = in.nextFloat();
+			notasAvaliacao1[idx] = in.nextFloat();
 
 			System.out.println("Nota da avaliação 2:");
-			notasAvaliacao2[index] = in.nextFloat();
+			notasAvaliacao2[idx] = in.nextFloat();
 
 			System.out.println("Dados registrados:");
-			consultarNotasDaTurma(index);
+			consultarNotasDaTurma(idx);
+
+			index++;
 
 		} else {
-			System.out.println("Não há espaó para novos registros.");
+			System.out.println("Não há espaço para novos registros.");
 		}
+		
+//		System.out.print("\033[H\033[2J");  
+//		System.out.flush();
 
 	}
 
@@ -124,8 +133,7 @@ public class ControleAcademico {
 	}
 
 	private static float calcularMediaFinal(float nota1, float nota2) {
-		float media = (nota1 + nota2) / 2;
-		return media;
+		return (nota1 + nota2) / 2;
 	}
 
 	private static String verificarSituacao(float media) {
