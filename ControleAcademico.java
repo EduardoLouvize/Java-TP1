@@ -57,29 +57,37 @@ public class ControleAcademico {
 				System.out.println("Informe o registro a ser consultado:");
 				int registro = in.nextInt();
 				if (registro >= 0 && registro < index) {
-					System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+					System.out.println("..................................");
+					System.out.println("----------------------------------");
 					consultarNotasDaTurma(registro);
-					System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+					System.out.println("----------------------------------");
+					System.out.println("..................................");
 				} else {
 					System.out.println("Registro inexistente.");
 				}
 				break;
 			case "3":
+				System.out.println("..................................");
+				System.out.println("----------------------------------");
 				System.out.println("NOTAS DA TURMA.");
-				System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+				System.out.println("----------------------------------");
 				consultarNotasDaTurma();
-				System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+				System.out.println("----------------------------------");
+				System.out.println("..................................");
 				break;
 			case "4":
+				System.out.println("...................");
 				System.out.println("-------------------");
 				System.out.println("Sistema finalizado.");
 				System.out.println("-------------------");
+				System.out.println("...................");
 				break;
 			default:
+				System.out.println("..............");
 				System.out.println("--------------");
 				System.out.println("Opção inválida");
 				System.out.println("--------------");
-				System.out.println("/\\/\\/\\/\\/\\/\\/\\");
+				System.out.println("..............");
 				break;
 			}
 		} while (!opcao.equals("4"));
@@ -95,10 +103,10 @@ public class ControleAcademico {
 			nomes[idx] = in.next();
 
 			System.out.println("Nota da avaliação 1:");
-			notasAvaliacao1[idx] = in.nextFloat();
+			notasAvaliacao1[idx] = validarNota();
 
 			System.out.println("Nota da avaliação 2:");
-			notasAvaliacao2[idx] = in.nextFloat();
+			notasAvaliacao2[idx] = validarNota();
 
 			System.out.println("Dados registrados:");
 			consultarNotasDaTurma(idx);
@@ -108,10 +116,20 @@ public class ControleAcademico {
 		} else {
 			System.out.println("Não há espaço para novos registros.");
 		}
-		
-//		System.out.print("\033[H\033[2J");  
-//		System.out.flush();
 
+	}
+
+	private static float validarNota() {
+		
+		float nota = in.nextFloat();
+		
+		while (nota < 0 || nota > 10) {
+
+			System.out.println("Nota inválida.");
+			nota = in.nextFloat();
+		}
+
+		return nota;
 	}
 
 	private static void consultarNotasDaTurma() {
